@@ -2,12 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 
 const menu = [
-  { nombre: 'La Clásica', desc: 'Carne 100% vacuno, queso cheddar, lechuga, tomate y nuestra salsa de la casa.', precio: '$6.990' },
+  { nombre: 'La Clásica', desc: 'Carne 100% vacuno, cheddar, lechuga, tomate y salsa de la casa.', precio: '$6.990' },
   { nombre: 'La Javier', desc: 'Doble carne, doble cheddar, tocino crocante y cebolla caramelizada.', precio: '$8.990' },
   { nombre: 'La Ismel', desc: 'Carne, queso azul, champiñones salteados y rúcula fresca.', precio: '$8.490' },
-  { nombre: 'La Picante', desc: 'Carne, queso pepper jack, jalapeños, guacamole y mayo ají.', precio: '$7.990' },
-  { nombre: 'La Pollo Crispy', desc: 'Pechuga apanada crocante, lechuga, pepinillos y mayo de ajo.', precio: '$7.490' },
-  { nombre: 'La Veggie', desc: 'Hamburguesa de garbanzos, palta, tomate, cebolla morada y lechuga.', precio: '$7.290' },
+  { nombre: 'La Picante', desc: 'Carne, pepper jack, jalapeños, guacamole y mayo ají.', precio: '$7.990' },
+  { nombre: 'Pollo Crispy', desc: 'Pechuga apanada crocante, lechuga, pepinillos y mayo de ajo.', precio: '$7.490' },
+  { nombre: 'La Veggie', desc: 'Hamburguesa de garbanzos, palta, tomate y cebolla morada.', precio: '$7.290' },
 ];
 
 const acompanamientos = [
@@ -16,176 +16,280 @@ const acompanamientos = [
   { nombre: 'Aros de cebolla', precio: '$2.990' },
   { nombre: 'Bebida o jugo', precio: '$1.790' },
 ];
+
+const cinta = ['Hecho al momento', 'Carne fresca', 'Pan casero', 'A la parrilla', 'Salsas de la casa'];
 ---
 
-<Layout title="Hamburguesas Javier Ismel" description="Hamburguesas artesanales hechas con cariño. Conoce nuestro menú y visítanos.">
-  <header class="hero">
-    <nav>
-      <span class="logo">🍔 Javier Ismel</span>
-      <div class="links">
-        <a href="#menu">Menú</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contacto</a>
-      </div>
-    </nav>
-    <div class="hero-contenido">
-      <p class="etiqueta">Hamburguesas artesanales</p>
-      <h1>Hamburguesas<br /><span>Javier Ismel</span></h1>
-      <p class="bajada">Carne jugosa, pan recién horneado y el sabor que te hace volver. Hechas al momento, con ingredientes frescos.</p>
-      <a class="boton" href="#menu">Ver el menú</a>
+<Layout title="Hamburguesas Javier Ismel" description="Hamburguesas artesanales hechas al momento. Conoce nuestro menú y visítanos.">
+  <nav class="nav">
+    <a class="logo" href="#inicio">JI<span>®</span></a>
+    <div class="links">
+      <a href="#menu">Menú</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#contacto">Contacto</a>
     </div>
+    <a class="pill" href="https://wa.me/56912345678" target="_blank" rel="noopener">Pedir ahora</a>
+  </nav>
+
+  <header id="inicio" class="hero">
+    <p class="kicker aparece">Hamburguesas artesanales · Desde 2026</p>
+    <h1 class="aparece">
+      <span class="linea">Hamburguesas</span>
+      <span class="linea grande">Javier</span>
+      <span class="linea grande lima">Ismel</span>
+    </h1>
+    <div class="hero-pie aparece">
+      <p>Carne jugosa, pan recién horneado y el sabor que te hace volver.</p>
+      <a class="flecha" href="#menu">Ver menú ↓</a>
+    </div>
+    <div class="burger" aria-hidden="true">🍔</div>
   </header>
 
-  <section id="menu" class="seccion">
-    <h2>Nuestro menú</h2>
-    <p class="sub">Todas nuestras hamburguesas se preparan al momento.</p>
-    <div class="grilla">
-      {menu.map((h) => (
-        <article class="tarjeta">
-          <div class="tarjeta-top">
-            <h3>{h.nombre}</h3>
-            <span class="precio">{h.precio}</span>
-          </div>
-          <p>{h.desc}</p>
-        </article>
+  <div class="cinta" aria-hidden="true">
+    <div class="cinta-track">
+      {[...cinta, ...cinta, ...cinta, ...cinta].map((t) => (
+        <span>{t} <b>✦</b></span>
       ))}
     </div>
+  </div>
 
-    <h3 class="titulo-acomp">Acompañamientos</h3>
-    <ul class="acomp">
-      {acompanamientos.map((a) => (
-        <li><span>{a.nombre}</span><span class="precio">{a.precio}</span></li>
+  <section id="menu" class="seccion">
+    <div class="encabezado aparece">
+      <p class="kicker">01 — El menú</p>
+      <h2>Elige tu<br /><span class="lima">favorita</span></h2>
+    </div>
+    <ol class="lista">
+      {menu.map((h, i) => (
+        <li class="item aparece">
+          <span class="num">{String(i + 1).padStart(2, '0')}</span>
+          <div class="info">
+            <h3>{h.nombre}</h3>
+            <p>{h.desc}</p>
+          </div>
+          <span class="precio">{h.precio}</span>
+        </li>
       ))}
-    </ul>
+    </ol>
+
+    <div class="acomp aparece">
+      <h3>Para acompañar</h3>
+      <ul>
+        {acompanamientos.map((a) => (
+          <li><span>{a.nombre}</span><span class="lima">{a.precio}</span></li>
+        ))}
+      </ul>
+    </div>
   </section>
 
   <section id="nosotros" class="seccion nosotros">
-    <h2>Sobre nosotros</h2>
-    <p>
-      En <strong>Hamburguesas Javier Ismel</strong> creemos que una buena hamburguesa se hace con paciencia
-      y buenos ingredientes. Molemos nuestra carne todos los días, horneamos nuestro propio pan y
-      preparamos cada salsa en casa. Ven a disfrutar en familia o con amigos.
+    <p class="kicker aparece">02 — Nosotros</p>
+    <p class="manifiesto aparece">
+      Una buena hamburguesa se hace con <span class="lima">paciencia</span> y buenos ingredientes.
+      Molemos la carne todos los días, horneamos nuestro pan y cada salsa es <span class="lima">de la casa</span>.
     </p>
-    <div class="destacados">
-      <div><span>🥩</span><p>Carne fresca molida a diario</p></div>
-      <div><span>🍞</span><p>Pan casero recién horneado</p></div>
-      <div><span>🔥</span><p>A la parrilla, al momento</p></div>
+    <div class="cifras">
+      <div class="cifra aparece"><strong>100%</strong><span>Carne de vacuno</span></div>
+      <div class="cifra aparece"><strong>24h</strong><span>Pan recién horneado</span></div>
+      <div class="cifra aparece"><strong>6</strong><span>Recetas propias</span></div>
     </div>
   </section>
 
   <section id="contacto" class="seccion contacto">
-    <h2>Visítanos</h2>
+    <p class="kicker aparece">03 — Visítanos</p>
     <div class="datos">
-      <div>
-        <h3>📍 Dirección</h3>
-        <p>Av. Principal 123, Santiago</p>
+      <div class="dato aparece">
+        <span class="etq">Dirección</span>
+        <p>Av. Principal 123<br />Santiago</p>
       </div>
-      <div>
-        <h3>🕒 Horario</h3>
-        <p>Lunes a jueves: 12:00 – 22:00<br />Viernes a domingo: 12:00 – 00:00</p>
+      <div class="dato aparece">
+        <span class="etq">Horario</span>
+        <p>Lun – Jue · 12:00 – 22:00<br />Vie – Dom · 12:00 – 00:00</p>
       </div>
-      <div>
-        <h3>📞 Pedidos</h3>
+      <div class="dato aparece">
+        <span class="etq">Pedidos</span>
         <p>+56 9 1234 5678</p>
       </div>
     </div>
-    <a class="boton" href="https://wa.me/56912345678" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+    <a class="cta aparece" href="https://wa.me/56912345678" target="_blank" rel="noopener">
+      Pide por WhatsApp <span>→</span>
+    </a>
   </section>
 
   <footer>
-    <p>© {new Date().getFullYear()} Hamburguesas Javier Ismel · Hechas con cariño 🍔</p>
+    <p class="firma">Javier Ismel</p>
+    <div class="pie">
+      <span>© {new Date().getFullYear()} Hamburguesas Javier Ismel</span>
+      <a href="#inicio">Volver arriba ↑</a>
+    </div>
   </footer>
 </Layout>
 
+<script>
+  const els = document.querySelectorAll('.aparece');
+  const obs = new IntersectionObserver(
+    (entradas) => {
+      entradas.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  els.forEach((el) => obs.observe(el));
+</script>
+
 <style>
+  .lima { color: var(--acento); }
+  .kicker {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--suave);
+    font-weight: 500;
+  }
+
+  /* Aparición al hacer scroll */
+  .aparece { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  :global(.aparece.visible) { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .aparece { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Navegación */
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem clamp(1rem, 4vw, 2.5rem);
+    background: linear-gradient(rgba(15, 17, 12, 0.9), rgba(15, 17, 12, 0));
+    backdrop-filter: blur(6px);
+  }
+  .logo { font-family: var(--display); font-size: 1.8rem; color: var(--texto); text-decoration: none; letter-spacing: 0.02em; }
+  .logo span { color: var(--acento); font-size: 0.9rem; vertical-align: top; }
+  .links { display: flex; gap: 2rem; }
+  .links a { color: var(--texto); text-decoration: none; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.15em; }
+  .links a:hover { color: var(--acento); }
+  .pill {
+    background: var(--acento);
+    color: #0f110c;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    padding: 0.7rem 1.2rem;
+    border-radius: 999px;
+  }
+  @media (max-width: 640px) { .links { display: none; } }
+
+  /* Portada */
   .hero {
-    background: linear-gradient(rgba(20, 12, 6, 0.75), rgba(20, 12, 6, 0.85)),
-      radial-gradient(circle at 70% 30%, #c2410c, #1c1008 70%);
-    color: #fff;
-    min-height: 92svh;
+    position: relative;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    padding: 7rem clamp(1rem, 4vw, 2.5rem) 3rem;
+    overflow: hidden;
+    background: radial-gradient(circle at 75% 35%, rgba(210, 255, 0, 0.12), transparent 55%);
   }
-  nav {
+  h1 { margin: 1rem 0 2rem; font-family: var(--display); font-weight: 400; text-transform: uppercase; line-height: 0.85; position: relative; z-index: 1; }
+  .linea { display: block; font-size: clamp(2rem, 7vw, 5rem); }
+  .grande { font-size: clamp(5rem, 22vw, 18rem); letter-spacing: -0.01em; }
+  .hero-pie { display: flex; justify-content: space-between; align-items: end; gap: 2rem; flex-wrap: wrap; border-top: 1px solid #2a2d24; padding-top: 1.5rem; position: relative; z-index: 1; }
+  .hero-pie p { margin: 0; max-width: 26rem; color: var(--suave); font-size: 1.05rem; }
+  .flecha { color: var(--acento); text-decoration: none; text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.85rem; font-weight: 700; }
+  .burger {
+    position: absolute;
+    right: -2rem;
+    top: 18%;
+    font-size: clamp(10rem, 32vw, 26rem);
+    filter: drop-shadow(0 30px 60px rgba(210, 255, 0, 0.18));
+    animation: flotar 6s ease-in-out infinite;
+    opacity: 0.9;
+  }
+  @keyframes flotar {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-24px) rotate(-3deg); }
+  }
+
+  /* Cinta en movimiento */
+  .cinta { background: var(--acento); color: #0f110c; overflow: hidden; padding: 0.9rem 0; transform: rotate(-1.5deg); margin: 2rem -1rem; }
+  .cinta-track { display: flex; width: max-content; animation: correr 28s linear infinite; }
+  .cinta span { font-family: var(--display); font-size: clamp(1.5rem, 4vw, 2.6rem); text-transform: uppercase; white-space: nowrap; padding-right: 2rem; }
+  .cinta b { font-weight: 400; margin-left: 2rem; }
+  @keyframes correr { to { transform: translateX(-50%); } }
+
+  /* Secciones */
+  .seccion { padding: 7rem clamp(1rem, 4vw, 2.5rem); max-width: 80rem; margin: 0 auto; }
+  h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(3rem, 10vw, 8rem); line-height: 0.9; margin: 1rem 0 3rem; }
+
+  /* Menú */
+  .lista { list-style: none; margin: 0; padding: 0; border-top: 1px solid #2a2d24; }
+  .item {
+    display: grid;
+    grid-template-columns: 4rem 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid #2a2d24;
+    transition: padding 0.3s ease, background 0.3s ease;
+  }
+  .item:hover { background: rgba(210, 255, 0, 0.05); padding-left: 1rem; padding-right: 1rem; }
+  .item:hover h3 { color: var(--acento); }
+  .num { font-family: var(--display); color: var(--suave); font-size: 1.3rem; }
+  .info h3 { margin: 0; font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.8rem, 4.5vw, 3.2rem); line-height: 1; transition: color 0.3s; }
+  .info p { margin: 0.4rem 0 0; color: var(--suave); }
+  .precio { font-family: var(--display); font-size: clamp(1.3rem, 3vw, 2rem); color: var(--acento); white-space: nowrap; }
+  @media (max-width: 560px) {
+    .item { grid-template-columns: 1fr auto; }
+    .num { display: none; }
+  }
+
+  .acomp { margin-top: 5rem; max-width: 34rem; margin-left: auto; }
+  .acomp h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 2rem; margin: 0 0 1rem; }
+  .acomp ul { list-style: none; margin: 0; padding: 0; }
+  .acomp li { display: flex; justify-content: space-between; padding: 0.8rem 0; border-bottom: 1px dashed #2a2d24; }
+
+  /* Nosotros */
+  .manifiesto { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem, 5.5vw, 4.5rem); line-height: 1.05; margin: 1.5rem 0 4rem; }
+  .cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; }
+  .cifra { border: 1px solid #2a2d24; border-radius: 1.25rem; padding: 2rem; display: grid; gap: 0.5rem; transition: border-color 0.3s; }
+  .cifra:hover { border-color: var(--acento); }
+  .cifra strong { font-family: var(--display); font-weight: 400; font-size: 4.5rem; line-height: 1; color: var(--acento); }
+  .cifra span { color: var(--suave); text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8rem; }
+
+  /* Contacto */
+  .datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 2rem; margin: 2.5rem 0 4rem; }
+  .etq { color: var(--acento); text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.75rem; font-weight: 700; }
+  .dato p { margin: 0.6rem 0 0; font-size: 1.3rem; }
+  .cta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem clamp(1.25rem, 5vw, 3rem);
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-  .logo { font-weight: 800; font-size: 1.2rem; }
-  .links { display: flex; gap: 1.25rem; }
-  .links a { color: #fff; text-decoration: none; font-weight: 500; opacity: 0.9; }
-  .links a:hover { color: var(--acento); }
-  .hero-contenido {
-    flex: 1;
-    display: grid;
-    place-content: center;
-    text-align: center;
-    gap: 1rem;
-    padding: 2rem 1.25rem 4rem;
-    max-width: 46rem;
-    margin: 0 auto;
-  }
-  .etiqueta {
-    margin: 0;
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--acento);
-    font-weight: 700;
-  }
-  h1 { margin: 0; font-size: clamp(2.6rem, 9vw, 5rem); line-height: 1; letter-spacing: -0.02em; }
-  h1 span { color: var(--acento); }
-  .bajada { margin: 0; font-size: 1.15rem; opacity: 0.9; }
-  .boton {
-    justify-self: center;
-    display: inline-block;
     background: var(--acento);
-    color: #fff;
-    padding: 0.85rem 1.8rem;
-    border-radius: 999px;
-    font-weight: 700;
+    color: #0f110c;
     text-decoration: none;
-    margin-top: 0.5rem;
-    transition: transform 0.15s;
+    font-family: var(--display);
+    text-transform: uppercase;
+    font-size: clamp(2rem, 7vw, 5.5rem);
+    padding: 1.5rem 2rem;
+    border-radius: 1.5rem;
+    line-height: 1;
   }
-  .boton:hover { transform: translateY(-2px); }
+  .cta span { transition: transform 0.3s; }
+  .cta:hover span { transform: translateX(12px); }
 
-  .seccion { padding: 4.5rem clamp(1.25rem, 5vw, 3rem); max-width: 68rem; margin: 0 auto; }
-  h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 0.25rem; text-align: center; }
-  .sub { text-align: center; color: var(--suave); margin: 0 0 2.5rem; }
-
-  .grilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; }
-  .tarjeta {
-    background: #fff;
-    border-radius: 1rem;
-    padding: 1.4rem;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
-    border-top: 4px solid var(--acento);
-  }
-  .tarjeta-top { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
-  .tarjeta h3 { margin: 0; font-size: 1.2rem; }
-  .tarjeta p { margin: 0.6rem 0 0; color: var(--suave); }
-  .precio { color: var(--acento); font-weight: 800; white-space: nowrap; }
-
-  .titulo-acomp { text-align: center; margin: 3rem 0 1rem; font-size: 1.4rem; }
-  .acomp { list-style: none; padding: 0; margin: 0 auto; max-width: 30rem; }
-  .acomp li { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px dashed #ddd2c4; }
-
-  .nosotros { text-align: center; max-width: 50rem; }
-  .nosotros > p { font-size: 1.1rem; color: var(--suave); }
-  .destacados { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; margin-top: 2rem; }
-  .destacados div { background: #fff; border-radius: 1rem; padding: 1.25rem; }
-  .destacados span { font-size: 2.2rem; }
-  .destacados p { margin: 0.4rem 0 0; font-weight: 600; }
-
-  .contacto { text-align: center; }
-  .datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.25rem; margin: 2rem 0; }
-  .datos h3 { margin: 0 0 0.3rem; }
-  .datos p { margin: 0; color: var(--suave); }
-
-  footer { background: #1c1008; color: #f3e9dc; text-align: center; padding: 1.5rem; }
-  footer p { margin: 0; font-size: 0.95rem; }
+  /* Pie */
+  footer { padding: 4rem clamp(1rem, 4vw, 2.5rem) 2rem; border-top: 1px solid #2a2d24; overflow: hidden; }
+  .firma { margin: 0; font-family: var(--display); text-transform: uppercase; font-size: clamp(4rem, 17vw, 15rem); line-height: 0.85; color: var(--acento); white-space: nowrap; }
+  .pie { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-top: 2rem; color: var(--suave); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; }
+  .pie a { color: var(--texto); text-decoration: none; }
 </style>
