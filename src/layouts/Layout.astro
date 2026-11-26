@@ -5,7 +5,7 @@ interface Props {
   title?: string;
   description?: string;
 }
-const { title = 'Pagina de prueba', description = 'Pagina de prueba' } = Astro.props;
+const { title = 'Hamburguesas Javier Ismel', description = 'Hamburguesas artesanales Javier Ismel' } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,11 +23,12 @@ const { title = 'Pagina de prueba', description = 'Pagina de prueba' } = Astro.p
 </html>
 
 <style is:global>
+  html { scroll-behavior: smooth; }
   :root {
-    --fondo: #faf8f5;
+    --fondo: #fdf6ee;
     --texto: #1c1b19;
     --suave: #6b6760;
-    --acento: #2f6fed;
+    --acento: #ea580c;
     color-scheme: light;
     font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   }

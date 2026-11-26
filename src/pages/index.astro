@@ -1,37 +1,191 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const menu = [
+  { nombre: 'La Clásica', desc: 'Carne 100% vacuno, queso cheddar, lechuga, tomate y nuestra salsa de la casa.', precio: '$6.990' },
+  { nombre: 'La Javier', desc: 'Doble carne, doble cheddar, tocino crocante y cebolla caramelizada.', precio: '$8.990' },
+  { nombre: 'La Ismel', desc: 'Carne, queso azul, champiñones salteados y rúcula fresca.', precio: '$8.490' },
+  { nombre: 'La Picante', desc: 'Carne, queso pepper jack, jalapeños, guacamole y mayo ají.', precio: '$7.990' },
+  { nombre: 'La Pollo Crispy', desc: 'Pechuga apanada crocante, lechuga, pepinillos y mayo de ajo.', precio: '$7.490' },
+  { nombre: 'La Veggie', desc: 'Hamburguesa de garbanzos, palta, tomate, cebolla morada y lechuga.', precio: '$7.290' },
+];
+
+const acompanamientos = [
+  { nombre: 'Papas fritas', precio: '$2.490' },
+  { nombre: 'Papas rústicas con queso', precio: '$3.490' },
+  { nombre: 'Aros de cebolla', precio: '$2.990' },
+  { nombre: 'Bebida o jugo', precio: '$1.790' },
+];
 ---
 
-<Layout>
-  <main>
-    <p class="etiqueta">Página nueva</p>
-    <h1>Pagina de prueba</h1>
-    <p class="bajada">
-      Esta página está lista para crecer. Escribe en el chat de Piloto qué quieres que diga,
-      cómo quieres que se vea, y míralo cambiar al instante.
+<Layout title="Hamburguesas Javier Ismel" description="Hamburguesas artesanales hechas con cariño. Conoce nuestro menú y visítanos.">
+  <header class="hero">
+    <nav>
+      <span class="logo">🍔 Javier Ismel</span>
+      <div class="links">
+        <a href="#menu">Menú</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </nav>
+    <div class="hero-contenido">
+      <p class="etiqueta">Hamburguesas artesanales</p>
+      <h1>Hamburguesas<br /><span>Javier Ismel</span></h1>
+      <p class="bajada">Carne jugosa, pan recién horneado y el sabor que te hace volver. Hechas al momento, con ingredientes frescos.</p>
+      <a class="boton" href="#menu">Ver el menú</a>
+    </div>
+  </header>
+
+  <section id="menu" class="seccion">
+    <h2>Nuestro menú</h2>
+    <p class="sub">Todas nuestras hamburguesas se preparan al momento.</p>
+    <div class="grilla">
+      {menu.map((h) => (
+        <article class="tarjeta">
+          <div class="tarjeta-top">
+            <h3>{h.nombre}</h3>
+            <span class="precio">{h.precio}</span>
+          </div>
+          <p>{h.desc}</p>
+        </article>
+      ))}
+    </div>
+
+    <h3 class="titulo-acomp">Acompañamientos</h3>
+    <ul class="acomp">
+      {acompanamientos.map((a) => (
+        <li><span>{a.nombre}</span><span class="precio">{a.precio}</span></li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="nosotros" class="seccion nosotros">
+    <h2>Sobre nosotros</h2>
+    <p>
+      En <strong>Hamburguesas Javier Ismel</strong> creemos que una buena hamburguesa se hace con paciencia
+      y buenos ingredientes. Molemos nuestra carne todos los días, horneamos nuestro propio pan y
+      preparamos cada salsa en casa. Ven a disfrutar en familia o con amigos.
     </p>
-  </main>
+    <div class="destacados">
+      <div><span>🥩</span><p>Carne fresca molida a diario</p></div>
+      <div><span>🍞</span><p>Pan casero recién horneado</p></div>
+      <div><span>🔥</span><p>A la parrilla, al momento</p></div>
+    </div>
+  </section>
+
+  <section id="contacto" class="seccion contacto">
+    <h2>Visítanos</h2>
+    <div class="datos">
+      <div>
+        <h3>📍 Dirección</h3>
+        <p>Av. Principal 123, Santiago</p>
+      </div>
+      <div>
+        <h3>🕒 Horario</h3>
+        <p>Lunes a jueves: 12:00 – 22:00<br />Viernes a domingo: 12:00 – 00:00</p>
+      </div>
+      <div>
+        <h3>📞 Pedidos</h3>
+        <p>+56 9 1234 5678</p>
+      </div>
+    </div>
+    <a class="boton" href="https://wa.me/56912345678" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+  </section>
+
+  <footer>
+    <p>© {new Date().getFullYear()} Hamburguesas Javier Ismel · Hechas con cariño 🍔</p>
+  </footer>
 </Layout>
 
 <style>
-  main {
-    min-height: 100svh;
+  .hero {
+    background: linear-gradient(rgba(20, 12, 6, 0.75), rgba(20, 12, 6, 0.85)),
+      radial-gradient(circle at 70% 30%, #c2410c, #1c1008 70%);
+    color: #fff;
+    min-height: 92svh;
+    display: flex;
+    flex-direction: column;
+  }
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem clamp(1.25rem, 5vw, 3rem);
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .logo { font-weight: 800; font-size: 1.2rem; }
+  .links { display: flex; gap: 1.25rem; }
+  .links a { color: #fff; text-decoration: none; font-weight: 500; opacity: 0.9; }
+  .links a:hover { color: var(--acento); }
+  .hero-contenido {
+    flex: 1;
     display: grid;
     place-content: center;
-    gap: 0.75rem;
-    padding: 2rem 1.25rem;
-    max-width: 44rem;
-    margin: 0 auto;
     text-align: center;
+    gap: 1rem;
+    padding: 2rem 1.25rem 4rem;
+    max-width: 46rem;
+    margin: 0 auto;
   }
   .etiqueta {
     margin: 0;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: var(--acento);
-    font-weight: 600;
+    font-weight: 700;
   }
-  h1 { margin: 0; font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.05; letter-spacing: -0.02em; }
-  .bajada { margin: 0; color: var(--suave); font-size: 1.1rem; }
+  h1 { margin: 0; font-size: clamp(2.6rem, 9vw, 5rem); line-height: 1; letter-spacing: -0.02em; }
+  h1 span { color: var(--acento); }
+  .bajada { margin: 0; font-size: 1.15rem; opacity: 0.9; }
+  .boton {
+    justify-self: center;
+    display: inline-block;
+    background: var(--acento);
+    color: #fff;
+    padding: 0.85rem 1.8rem;
+    border-radius: 999px;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 0.5rem;
+    transition: transform 0.15s;
+  }
+  .boton:hover { transform: translateY(-2px); }
+
+  .seccion { padding: 4.5rem clamp(1.25rem, 5vw, 3rem); max-width: 68rem; margin: 0 auto; }
+  h2 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 0.25rem; text-align: center; }
+  .sub { text-align: center; color: var(--suave); margin: 0 0 2.5rem; }
+
+  .grilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; }
+  .tarjeta {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.4rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    border-top: 4px solid var(--acento);
+  }
+  .tarjeta-top { display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; }
+  .tarjeta h3 { margin: 0; font-size: 1.2rem; }
+  .tarjeta p { margin: 0.6rem 0 0; color: var(--suave); }
+  .precio { color: var(--acento); font-weight: 800; white-space: nowrap; }
+
+  .titulo-acomp { text-align: center; margin: 3rem 0 1rem; font-size: 1.4rem; }
+  .acomp { list-style: none; padding: 0; margin: 0 auto; max-width: 30rem; }
+  .acomp li { display: flex; justify-content: space-between; padding: 0.7rem 0; border-bottom: 1px dashed #ddd2c4; }
+
+  .nosotros { text-align: center; max-width: 50rem; }
+  .nosotros > p { font-size: 1.1rem; color: var(--suave); }
+  .destacados { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; margin-top: 2rem; }
+  .destacados div { background: #fff; border-radius: 1rem; padding: 1.25rem; }
+  .destacados span { font-size: 2.2rem; }
+  .destacados p { margin: 0.4rem 0 0; font-weight: 600; }
+
+  .contacto { text-align: center; }
+  .datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+  .datos h3 { margin: 0 0 0.3rem; }
+  .datos p { margin: 0; color: var(--suave); }
+
+  footer { background: #1c1008; color: #f3e9dc; text-align: center; padding: 1.5rem; }
+  footer p { margin: 0; font-size: 0.95rem; }
 </style>
