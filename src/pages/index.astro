@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <main>
+    <p class="etiqueta">Página nueva</p>
+    <h1>Pagina de prueba</h1>
+    <p class="bajada">
+      Esta página está lista para crecer. Escribe en el chat de Piloto qué quieres que diga,
+      cómo quieres que se vea, y míralo cambiar al instante.
+    </p>
+  </main>
+</Layout>
+
+<style>
+  main {
+    min-height: 100svh;
+    display: grid;
+    place-content: center;
+    gap: 0.75rem;
+    padding: 2rem 1.25rem;
+    max-width: 44rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .etiqueta {
+    margin: 0;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--acento);
+    font-weight: 600;
+  }
+  h1 { margin: 0; font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.05; letter-spacing: -0.02em; }
+  .bajada { margin: 0; color: var(--suave); font-size: 1.1rem; }
+</style>
